@@ -27,6 +27,8 @@ https://wikidocs.net/7014
 
 ### 블로그 작성시 참고 
 
+https://luvris2.tistory.com/
+
 https://hanul0147.tistory.com/
 
 https://vision-ai.tistory.com/
