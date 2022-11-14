@@ -17,7 +17,22 @@ https://www.google.com/intl/ko/chrome/
 
 https://www.anaconda.com/products/individual
 
-### 3. 주피터 노트북 실행하기 
+### 3. 아나콘다 프롬프트 실행
+
+### 4. 파이썬 가상환경 만들기
+
+$conda create -n 가상환경이름 python=3.8 openssl numpy scipy matplotlib ipython scikit-learn pandas pillow jupyter seaborn
+
+### 5. 가상환경 실행
+
+$conda activate 가상환경 이름
+
+### 6. 주피터 노트북 실행
+
+$jupyter notebook .
+
+
+---
 
 
 ### 파이썬 연습문제
