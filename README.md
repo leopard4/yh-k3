@@ -44,11 +44,13 @@ https://wikidocs.net/7014
 
 https://luvris2.tistory.com/
 
+https://vision-ai.tistory.com/
+
+https://mscha.tistory.com/
+
 https://story-jy.tistory.com/
 
 https://hanul0147.tistory.com/
-
-https://vision-ai.tistory.com/
 
 https://dbfoot.tistory.com/
 
