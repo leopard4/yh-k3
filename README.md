@@ -4,7 +4,7 @@
 
 강의방식 : https://docs.google.com/presentation/d/1f1FX2MCdSDKna9GuZqhKpjBPqTAjoEPzv5qoNTAbrmw/edit#slide=id.p
 
-블로그 피드백 주소 : https://docs.google.com/spreadsheets/d/1jnv5D4iRjrZWwo3dg-j9kbBd1zyeS7DJCxtrSua9WqA/edit?usp=sharing
+
 
 
 ## 실습 환경 셋팅 
