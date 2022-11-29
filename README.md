@@ -44,7 +44,9 @@ https://wikidocs.net/7014
 
 ### 데이터분석
 
-판다스에서 제공하는 다양한 함수들 : ttps://pandas.pydata.org/docs/reference/api/pandas.Series.str.upper.html
+판다스에서 제공하는 다양한 함수들 : 
+
+https://pandas.pydata.org/docs/reference/api/pandas.Series.str.upper.html
 
 ---
 
