@@ -4,7 +4,12 @@
 
 강의방식 : https://docs.google.com/presentation/d/1f1FX2MCdSDKna9GuZqhKpjBPqTAjoEPzv5qoNTAbrmw/edit#slide=id.p
 
+## 강의자료
 
+머신러닝 : https://docs.google.com/presentation/d/1pvgye0Gt5DKgA7Kn5pc4Cfy-D4VtmQTxVIvbxa-GfFc/edit#slide=id.ga8aab8fd2a_0_50
+
+
+---
 
 
 ## 실습 환경 셋팅 
