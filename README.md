@@ -36,6 +36,24 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 ---
 
 
+- 웹 대시보드 소개 : https://docs.google.com/presentation/d/1Tf7Kwnlqz20-ls_2syWhFhNesAv3YYgHQ8El8QsowxE/edit?usp=sharing
+- 비주얼 스튜디오 코드에서 Git 연동하는 방법 : https://docs.google.com/presentation/d/16cxS9jEqpik1JJSkw9zQIBFVKrek8nAYZFagIWfJzc4/edit?usp=sharing
+- Git 이란 : https://vision-ai.tistory.com/entry/VCS-Version-Control-System-Git
+- Git 용어와 사용법 : https://docs.google.com/presentation/d/1u-Sj4st6Kco0_6AVvWqwqNVoR8bRcOP3luHGKhwXgKA/edit?usp=sharing
+- EC2 에 배포 : https://docs.google.com/presentation/d/1Iac3W91CNJJRwkFHVCDlQ5xyCSSlyQ5UmyuE5D4nah4/edit?usp=sharing
+- EC2 에 파이썬 라이브러리 설치 명령  :  $conda create -n 가상환경이름 python=3.7 numpy scipy matplotlib ipython scikit-learn pandas pillow jupyter seaborn
+
+- 스트림릿에서 차트에 한글 나오게 설정하는 방법 : https://luvris2.tistory.com/119
+
+- 스팀 게임 데이터로 만든 웹 대시보드 예제 : http://ec2-52-78-40-92.ap-northeast-2.compute.amazonaws.com:8504/
+
+- 와인 리뷰데이터로 만든 웹 대시보드 예제 : http://ec2-3-35-234-38.ap-northeast-2.compute.amazonaws.com:8505/
+
+- 국내 관광명소 데이터로 만든 웹 대시보드 예제 : http://ec2-15-165-203-115.ap-northeast-2.compute.amazonaws.com:8501/
+
+---
+
+
 ## 실습 환경 셋팅 
 
 ### 1. Chrome 설치 
