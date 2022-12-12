@@ -128,18 +128,61 @@ from movie m
 left join review r
 on m.id = r.movie_id
 where title like '%mon%';
+use movie_db;
+select * from user;
 -- 즐겨찾기 설정하는 SQL 
+insert into favorite (movie_id, user_id)
+values (87, 7);
 
 -- 즐겨찾기 해제하는 SQL
+delete from favorite
+where id = 1;
+
+delete from favorite
+where user_id = 7 and movie_id = 33;
 
 -- 즐겨찾기 설정된 영화목록 가져오는 SQL 
+select f.id as favorite_id, m.title, 
+		count(r.id) as review_cnt, 
+        ifnull( avg(r.rating) , 0) as rating_avg, 
+		m.id as movie_id
+from favorite f 
+join movie m 
+on f.movie_id = m.id
+left join review r 
+on f.movie_id = r.movie_id
+where f.user_id = 7
+group by f.movie_id
+order by f.created_at desc;
+
+
 
 -- 메인화면의 영화 리스트 가져오는 SQL : 리뷰갯수가 많은것부터
 -- ( 내가 즐겨찾기 한 영화와 아닌 영화를 구분할수 있는 컬럼 필요)
-
+select m.id, m.title, 
+		count(r.id) as review_cnt, avg(r.rating) as rating_avg, 
+		if( f.id is null, 0 , 1 ) as is_my_favorite
+from movie m 
+left join review r
+on m.id = r.movie_id 
+left join favorite f 
+on m.id = f.movie_id and f.user_id = 7
+group by m.id
+order by review_cnt desc
+limit 0, 25;
 -- 메인화면의 영화 리스트 가져오는 SQL : 별점 평균 높은 순으로 
 -- ( 내가 즐겨찾기 한 영화와 아닌 영화를 구분할수 있는 컬럼 필요)
-
+select m.id, m.title, 
+		count(r.id) as review_cnt, avg(r.rating) as rating_avg, 
+		if( f.id is null, 0 , 1 ) as is_my_favorite
+from movie m 
+left join review r
+on m.id = r.movie_id 
+left join favorite f 
+on m.id = f.movie_id and f.user_id = 7
+group by m.id
+order by rating_avg desc
+limit 0, 25;
 
 
 
