@@ -41,7 +41,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 - Git 이란 : https://vision-ai.tistory.com/entry/VCS-Version-Control-System-Git
 - Git 용어와 사용법 : https://docs.google.com/presentation/d/1u-Sj4st6Kco0_6AVvWqwqNVoR8bRcOP3luHGKhwXgKA/edit?usp=sharing
 - EC2 에 배포 : https://docs.google.com/presentation/d/1Iac3W91CNJJRwkFHVCDlQ5xyCSSlyQ5UmyuE5D4nah4/edit?usp=sharing
-- EC2 에 파이썬 라이브러리 설치 명령  :  $conda create -n 가상환경이름 python=3.7 numpy scipy matplotlib ipython scikit-learn pandas pillow jupyter seaborn
+- EC2 에 파이썬 라이브러리 설치 명령  :  $conda create -n 가상환경이름 python=3.8 numpy scipy matplotlib ipython scikit-learn pandas pillow jupyter seaborn
 
 - 스트림릿에서 차트에 한글 나오게 설정하는 방법 : https://luvris2.tistory.com/119
 
