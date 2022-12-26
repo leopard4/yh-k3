@@ -8,6 +8,13 @@
 
 머신러닝 : https://docs.google.com/presentation/d/1pvgye0Gt5DKgA7Kn5pc4Cfy-D4VtmQTxVIvbxa-GfFc/edit#slide=id.ga8aab8fd2a_0_50
 
+뉴럴넷 (인공신경망) : https://docs.google.com/presentation/d/1DCOW7Lum2rnoPU7gxpznimrXV0DOJFc-YkkJt3jZC0U/edit?usp=sharing
+
+CNN : https://docs.google.com/presentation/d/1En1eB-RJTFWHY7ysQO1dC8y5S5Uoo-hTO8G1xVlp8B0/edit?usp=sharing
+
+모델 및 스케일러 등을 저장하는 방법 :  https://bit.ly/3aMhT0Q
+
+
 
 ---
 
