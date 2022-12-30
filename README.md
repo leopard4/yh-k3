@@ -14,7 +14,7 @@ CNN : https://docs.google.com/presentation/d/1En1eB-RJTFWHY7ysQO1dC8y5S5Uoo-hTO8
 
 모델 및 스케일러 등을 저장하는 방법 :  https://bit.ly/3aMhT0Q
 
-
+이미지 증강 실습 파일 : https://block-edu-test.s3.ap-northeast-2.amazonaws.com/kagglecatsanddogs_5340.zip
 
 ---
 
