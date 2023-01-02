@@ -18,6 +18,8 @@ CNN : https://docs.google.com/presentation/d/1En1eB-RJTFWHY7ysQO1dC8y5S5Uoo-hTO8
 
 트랜스퍼 러닝에 사용가능한 모델들 : https://www.tensorflow.org/api_docs/python/tf/keras/applications?hl=ko
 
+15번 프로젝트의 데이터셋 : https://block-yh-test1.s3.amazonaws.com/38_%E1%84%89%E1%85%B5%E1%86%AF%E1%84%89%E1%85%B3%E1%86%B8%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF.zip
+
 ---
 
 
