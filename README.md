@@ -16,6 +16,8 @@ CNN : https://docs.google.com/presentation/d/1En1eB-RJTFWHY7ysQO1dC8y5S5Uoo-hTO8
 
 이미지 증강 실습 파일 : https://block-edu-test.s3.ap-northeast-2.amazonaws.com/kagglecatsanddogs_5340.zip
 
+트랜스퍼 러닝에 사용가능한 모델들 : https://www.tensorflow.org/api_docs/python/tf/keras/applications?hl=ko
+
 ---
 
 
