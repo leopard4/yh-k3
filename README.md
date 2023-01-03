@@ -20,6 +20,12 @@ CNN : https://docs.google.com/presentation/d/1En1eB-RJTFWHY7ysQO1dC8y5S5Uoo-hTO8
 
 15번 프로젝트의 데이터셋 : https://block-yh-test1.s3.amazonaws.com/38_%E1%84%89%E1%85%B5%E1%86%AF%E1%84%89%E1%85%B3%E1%86%B8%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF.zip
 
+- 시카고 범죄 데이터1 : https://drive.google.com/file/d/1fE0ThvIrHLn2_y-L-4AD5Ggpt0bU5F1A/view?usp=sharing
+
+- 시카고 범죄 데이터2 : https://drive.google.com/file/d/1wo4zY9mz8XzsF7H7OWUAhUrNlKI98xPX/view?usp=sharing
+
+- 시카고 범죄 데이터3 : https://drive.google.com/file/d/11t2RWb8pRidwDPk5u21GCGEWzLK2tNmG/view?usp=sharing
+
 ---
 
 
