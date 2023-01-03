@@ -20,6 +20,12 @@ CNN : https://docs.google.com/presentation/d/1En1eB-RJTFWHY7ysQO1dC8y5S5Uoo-hTO8
 
 15번 프로젝트의 데이터셋 : https://block-yh-test1.s3.amazonaws.com/38_%E1%84%89%E1%85%B5%E1%86%AF%E1%84%89%E1%85%B3%E1%86%B8%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF.zip
 
+- 시카고 범죄 데이터1 : https://drive.google.com/file/d/1fE0ThvIrHLn2_y-L-4AD5Ggpt0bU5F1A/view?usp=sharing
+
+- 시카고 범죄 데이터2 : https://drive.google.com/file/d/1wo4zY9mz8XzsF7H7OWUAhUrNlKI98xPX/view?usp=sharing
+
+- 시카고 범죄 데이터3 : https://drive.google.com/file/d/11t2RWb8pRidwDPk5u21GCGEWzLK2tNmG/view?usp=sharing
+
 ---
 
 
@@ -61,6 +67,20 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 - 와인 리뷰데이터로 만든 웹 대시보드 예제 : http://ec2-3-35-234-38.ap-northeast-2.compute.amazonaws.com:8505/
 
 - 국내 관광명소 데이터로 만든 웹 대시보드 예제 : http://ec2-15-165-203-115.ap-northeast-2.compute.amazonaws.com:8501/
+
+---
+
+### API 서버 개발
+
+- API 서버 : https://docs.google.com/presentation/d/1dsCZZ4LjywFe_H5wDFvGe4UVmiB2HiaBIdcmugTQorU/edit?usp=sharing
+
+- Python 으로 MySQL 작업 : https://docs.google.com/presentation/d/1adHZUnwVZ0jA3rAO68K5MnsndpWhl9IR2q_f70wE5bQ/edit?usp=sharing
+
+- 포스트맨 사용법 : https://docs.google.com/presentation/d/1YVJtjcqSCC5Z6zFFE-ix8eugs_uh_vdwZmrvgx5VBKQ/edit?usp=sharing
+
+- JWT 자료 : https://nesoy.github.io/articles/2020-03/JWT
+
+- 포스트맨에서 인증토큰 셋팅하는 방법 : https://docs.google.com/presentation/d/1YVJtjcqSCC5Z6zFFE-ix8eugs_uh_vdwZmrvgx5VBKQ/edit?usp=sharing
 
 ---
 
