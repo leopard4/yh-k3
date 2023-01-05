@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import request
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt, jwt_required
 from flask_restful import Resource
 from mysql.connector import Error
 
@@ -136,5 +136,24 @@ class UserLoginResource(Resource) :
 
         return {'result' : 'success' , 
                 'access_token' : access_token}, 200
+
+
+#### 로그아웃 #####
+
+# 로그아웃된 토큰을 저장할 set 만든다.
+
+jwt_blacklist = set()
+
+class UserLogoutResource(Resource) :
+
+    @jwt_required()
+    def post(self) :
+        
+        jti = get_jwt()['jti']
+        print(jti)
+        jwt_blacklist.add(jti)
+
+        return {'result' : 'success'} , 200
+
 
 

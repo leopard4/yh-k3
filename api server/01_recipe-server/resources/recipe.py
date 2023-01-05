@@ -242,15 +242,24 @@ class RecipeResource(Resource) :
         
 class RecipePublishResource(Resource) :
 
+    @jwt_required()
     def put(self, recipe_id) :
+
+        user_id = get_jwt_identity()
 
         try :
             connection = get_connection()
+            
+            ### 내가 작성한 레시피인지 확인 ###
+            ### recipe_id 로 레시피를 가져온다.
+
+            ### 디비에 저장되어있는 user_id 컬럼의 값이
+            ### 토큰에서 뽑은 user_id랑 같은지 확인
 
             query = '''update recipe 
                     set is_publish = 1
-                    where id = %s;'''
-            record = (recipe_id , )
+                    where id = %s and user_id = %s;'''
+            record = (recipe_id , user_id )
 
             cursor = connection.cursor()
             cursor.execute(query, record)
@@ -265,14 +274,18 @@ class RecipePublishResource(Resource) :
 
         return {'result' : 'success'} , 200
 
+    @jwt_required()
     def delete(self, recipe_id) :
+
+        user_id = get_jwt_identity()
+
         try :
             connection = get_connection()
 
             query = '''update recipe 
                     set is_publish = 0
-                    where id = %s;'''
-            record = (recipe_id , )
+                    where id = %s and user_id = %s;'''
+            record = (recipe_id , user_id )
 
             cursor = connection.cursor()
             cursor.execute(query, record)
@@ -288,4 +301,42 @@ class RecipePublishResource(Resource) :
         return {'result' : 'success'} , 200
 
 
+class MyRecipeListResource(Resource) :
+
+    @jwt_required()
+    def get(self) :
+        
+        user_id = get_jwt_identity()
+
+        try : 
+            connection = get_connection()
+            query = '''select *
+                    from recipe
+                    where user_id = %s ;'''
+            record = (user_id , )
+
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, record)
+
+            result_list = cursor.fetchall()
+
+            i = 0
+            for row in result_list :
+                result_list[i]['created_at'] = row['created_at'].isoformat()
+                result_list[i]['updated_at'] = row['updated_at'].isoformat()
+                i = i + 1
+
+            cursor.close()
+            connection.close()
+
+        except Error as e :
+            print(e)
+            cursor.close()
+            connection.close()
+            return {'error' : str(e)} , 500
+
+
+        return {'result' : 'success',
+                'items' : result_list ,
+                'count' : len(result_list)  }, 200
 
