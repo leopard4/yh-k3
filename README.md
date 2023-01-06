@@ -86,6 +86,8 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 실습 1 : https://docs.google.com/presentation/d/1QKlMbRgWOUaHxqatJGUetrf-6WSSWqdTpBZqv7FW1t4/edit?usp=sharing
 
+- 실습 2 : https://docs.google.com/presentation/d/16P5E-14EDVCuM3oWA9yWiStA6xZuWJvGjNuzFHdZdrY/edit?usp=sharing
+
 - 서버리스에 aws credential 설정 : https://docs.google.com/presentation/d/1SL3TPsZ0ebqdSRvNXTikP97Qp9jBRJdlspQrjxQGcnQ/edit?usp=sharing
 
 ---
