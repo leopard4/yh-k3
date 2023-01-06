@@ -159,3 +159,54 @@ class MemoResource(Resource) :
         return {'result' : 'success'}, 200
 
 
+class FollowMemoListResource(Resource) :
+
+    @jwt_required()
+    def get(self) :
+
+        offset = request.args.get('offset')
+        limit = request.args.get('limit')
+
+        user_id = get_jwt_identity()
+
+        try : 
+            connection = get_connection()
+            query = '''select u.nickname, m.title, m.datetime, m.content,
+                    m.createdAt, f.followeeId, m.id as memoId
+                    from follow f
+                    join user u
+                    on f.followeeId = u.id
+                    join memo m
+                    on m.userId = f.followeeId
+                    where f.followerId = %s
+                    order by m.datetime desc
+                    limit '''+ offset +''' , '''+ limit +''' ; '''
+            record = (user_id , )
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, record)
+            result_list = cursor.fetchall()
+
+            i = 0
+            for row in result_list :
+                result_list[i]['createdAt'] = row['createdAt'].isoformat() 
+                result_list[i]['datetime'] = row['datetime'].isoformat()               
+                i = i + 1
+            
+            cursor.close()
+            connection.close()
+        
+        except Error as e:
+            print(e)
+            cursor.close()
+            connection.close()
+            return {'error' : str(e)}, 500
+
+        return {'result' : 'success',
+                'items' : result_list,
+                'count' : len(result_list) }, 200
+
+
+
+
+
+
