@@ -94,4 +94,68 @@ class MemoListResource(Resource) :
                 "count" : len(result_list)}, 200
 
 
+class MemoResource(Resource) :
+
+    @jwt_required()
+    def put(self, memo_id) :
+        # {
+        #     "title": "점심약속8",
+        #     "datetime": "2023-07-18 11:30",
+        #     "content": "친구랑 햄버거"
+        # }
+
+        data = request.get_json()
+        user_id = get_jwt_identity()
+
+        try :
+            connection = get_connection()
+            query = '''update memo
+                    set 
+                    title = %s,
+                    datetime = %s,
+                    content = %s 
+                    where id = %s and userId = %s;'''
+            record = (data['title'], data['datetime'],
+                    data['content'], memo_id, user_id)            
+            cursor = connection.cursor()
+            cursor.execute(query, record)
+            connection.commit()
+            cursor.close()
+            connection.close()
+        
+        except Error as e:
+            print(e)
+            cursor.close()
+            connection.close()
+            return {'error' : str(e)} , 500
+
+        return {'result' : 'success'} , 200
+
+
+
+    @jwt_required()
+    def delete(self, memo_id) :
+
+        user_id = get_jwt_identity()
+
+        try :
+            connection = get_connection()
+            query = '''delete from memo
+                    where id = %s and userId = %s;'''
+            record = (memo_id, user_id)
+            cursor = connection.cursor()
+            cursor.execute(query, record)
+            connection.commit()
+            cursor.close()
+            connection.close()
+        
+        except Error as e:
+            print(e)
+            cursor.close()
+            connection.close()
+            return {'error' : str(e)} , 500
+
+
+        return {'result' : 'success'}, 200
+
 
