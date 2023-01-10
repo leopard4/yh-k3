@@ -80,4 +80,48 @@ class ReviewListResource(Resource) :
                 'count' : len(result_list)}
 
 
+class MovieReivewResource(Resource) :
+
+    def get(self, movie_id) :
+
+        offset = request.args.get('offset')
+        limit = request.args.get('limit')
+
+        try :
+            connection = get_connection()
+
+            query = '''select r.id, u.name, u.gender, r.rating 
+                    from rating r
+                    join user u
+                    on r.user_id = u.id
+                    where r.movie_id = %s
+                    limit '''+offset+''', '''+limit+''';'''
+
+            record = (movie_id, )
+
+            cursor = connection.cursor(dictionary=True)
+
+            cursor.execute(query, record)
+
+            result_list = cursor.fetchall()
+
+            cursor.close()
+            connection.close()
+
+        except Error as e :
+            print(e)            
+            cursor.close()
+            connection.close()
+            return {"error" : str(e)}, 500
+
+
+        return {'result' : 'success' ,
+                'items' : result_list,  
+                'count' : len(result_list)}
+
+
+
+
+
+
 
