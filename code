@@ -1,3 +1,25 @@
+for label in response['Labels']:
+    print ("Label: " + label['Name'])
+    print ("Confidence: " + str(label['Confidence']))
+    print ("Instances:")
+    for instance in label['Instances']:
+        print ("  Bounding box")
+        print ("    Top: " + str(instance['BoundingBox']['Top']))
+        print ("    Left: " + str(instance['BoundingBox']['Left']))
+        print ("    Width: " +  str(instance['BoundingBox']['Width']))
+        print ("    Height: " +  str(instance['BoundingBox']['Height']))
+        print ("  Confidence: " + str(instance['Confidence']))
+        print()
+
+    print ("Parents:")
+    for parent in label['Parents']:
+        print ("   " + parent['Name'])
+    print ("----------")
+    print ()
+
+
+----------------------
+
 import numpy as np
 from google.colab import files
 from tensorflow.keras.preprocessing import image
