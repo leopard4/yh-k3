@@ -90,6 +90,13 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 서버리스에 aws credential 설정 : https://docs.google.com/presentation/d/1SL3TPsZ0ebqdSRvNXTikP97Qp9jBRJdlspQrjxQGcnQ/edit?usp=sharing
 
+- 구글 Vision Api : https://cloud.google.com/vision/docs/drag-and-drop?hl=ko
+
+- aws rekognition 매뉴얼 : https://docs.aws.amazon.com/ko_kr/rekognition/latest/dg/what-is.html
+
+- 실습 3 : https://docs.google.com/presentation/d/1wKcb0QAeAdUY4W8YHZZaUhARrmrYMdyWSHvhfNPZZ0U/edit?usp=sharing
+
+
 ---
 
 
