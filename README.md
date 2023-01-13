@@ -100,6 +100,13 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 ---
 
 
+### Java
+
+- 자바 문법 책 : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%B0%94%EC%9D%98%EC%A0%95%EC%84%9D_basic_%EC%9A%94%EC%95%BD%EC%A7%91.pdf
+
+---
+
+
 ## 실습 환경 셋팅 
 
 ### 1. Chrome 설치 
