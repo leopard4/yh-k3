@@ -125,6 +125,8 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 - https://docs.google.com/presentation/d/1dU8iCAYL_vGOI2Dude6rdUWILgJImLt_C2EP-YmDRBs/edit?usp=sharing
 
 
+- https://docs.google.com/presentation/d/15Gd-grbYACYDL21r2Q5qQgfena4WuljQKFAMDFDsWdA/edit?usp=sharing
+
 
 ---
 
