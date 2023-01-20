@@ -131,6 +131,12 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 - https://docs.google.com/presentation/d/1guTf8AFfpK-ei3uLza9cybO9BFlDCH5Q7KRWlivJmM8/edit?usp=sharing
 
 
+- https://docs.google.com/presentation/d/1Kp24OKv0Y72o51WqCqT-1Rx0ljtuIGZfRG341lOgvFw/edit?usp=sharing
+
+
+
+- 자바 연습문제 : https://wikidocs.net/157998
+
 
 
 ---
