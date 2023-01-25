@@ -140,6 +140,14 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 - 자바 연습문제 : https://wikidocs.net/157998
 
 
+---
+
+### 안드로이드 
+
+- 첫 안드로이드 샘플앱 개발에 필요한 데이터 : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/dice-app-data.zip
+
+- 샘플앱 모양 : https://docs.google.com/presentation/d/1Bdh05PFg37RVJTpR1e54OyGc3ZiiGIYHge4NDS-eOC0/edit?usp=sharing
+
 
 ---
 
