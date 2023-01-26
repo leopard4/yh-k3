@@ -156,6 +156,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 실습 2 : https://docs.google.com/presentation/d/1iF3dxBLcCB_CTZEVPRuIMa01HtsYiZmTYcqvUOSFI1E/edit?usp=sharing
 
+- 퀴즈앱  데이터 : https://drive.google.com/file/d/1viJaAny2v_m5LxlKM9e1d9ilejNwYuWj/view?usp=sharing
 
 ---
 
