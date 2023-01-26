@@ -150,6 +150,8 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 샘플앱 모양 : https://docs.google.com/presentation/d/1Bdh05PFg37RVJTpR1e54OyGc3ZiiGIYHge4NDS-eOC0/edit?usp=sharing
 
+- 안드로이드 애니메이션 오픈소스 라이브러리 : https://github.com/daimajia/AndroidViewAnimations
+
 - 실습 1 : https://docs.google.com/presentation/d/1POAPZf0juVnhXe2MnZTE0YaeUMlk7SHC2j9-4IdPbus/edit?usp=sharing
 
 - 실습 2 : https://docs.google.com/presentation/d/1iF3dxBLcCB_CTZEVPRuIMa01HtsYiZmTYcqvUOSFI1E/edit?usp=sharing
