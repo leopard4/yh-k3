@@ -158,6 +158,10 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 퀴즈앱  데이터 : https://drive.google.com/file/d/1viJaAny2v_m5LxlKM9e1d9ilejNwYuWj/view?usp=sharing
 
+- 알람소리 파일 : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/alarm.zip
+
+
+
 ---
 
 
