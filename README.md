@@ -160,6 +160,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 알람소리 파일 : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/alarm.zip
 
+- 실습 3 : https://docs.google.com/presentation/d/1UlvkfNeE90mQo5LfnohCxBTw1k5c4QH4VidOZhzLD48/edit?usp=sharing
 
 
 ---
