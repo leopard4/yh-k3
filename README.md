@@ -164,6 +164,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 안드로이드 Activity Life Cycle : https://developer.android.com/guide/components/activities/activity-lifecycle?hl=ko 
 
+- 실습 4 : https://docs.google.com/presentation/d/1l-co-s_dWyNVNGYZm-yDBzWkKpA6_KYn4HzgeLeybEU/edit?usp=sharing
 
 
 ---
