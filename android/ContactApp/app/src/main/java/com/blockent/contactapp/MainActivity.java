@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 
 import com.blockent.contactapp.adapter.ContactAdapter;
@@ -46,20 +47,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // db 로부터 데이터를 가져와서,
-        // 리사이클러뷰에 표시하자.
-        DatabaseHandler db = new DatabaseHandler(MainActivity.this);
-        contactList = db.getAllContacts();
-        db.close();
-
-        // 어댑터를 만든다.
-        adapter = new ContactAdapter(MainActivity.this, contactList);
-        // 어댑터를 리사이클러뷰에 셋팅!!!
-        recyclerView.setAdapter(adapter);
 
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DatabaseHandler db = new DatabaseHandler(MainActivity.this);
+        contactList = db.getAllContacts();
+
+        adapter = new ContactAdapter(MainActivity.this, contactList);
+
+        recyclerView.setAdapter(adapter);
+
+        db.close();
+
+    }
 }
 
 

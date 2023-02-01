@@ -5,6 +5,7 @@ package com.blockent.contactapp.adapter;
 // 2. 상속받은 클래스가 abstract 이므로, unimplemented method 오버라이드!
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blockent.contactapp.EditActivity;
+import com.blockent.contactapp.MainActivity;
 import com.blockent.contactapp.R;
 import com.blockent.contactapp.model.Contact;
 
@@ -76,12 +80,37 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         TextView txtName;
         TextView txtPhone;
         ImageView imgDelete;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtPhone = itemView.findViewById(R.id.txtPhone);
             imgDelete = itemView.findViewById(R.id.imgDelete);
+            cardView = itemView.findViewById(R.id.cardView);
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // 1. 인텐트에 유저가 어떤 행을 눌렀는지 파악하여
+                    //    누른 이름과 전화번호를 담아서
+                    int index = getAdapterPosition();
+
+                    Contact contact = contactList.get(index);
+
+                    // 2. 수정 액티비티를 띄운다.
+                    //    어떤 액티비티가 어떤 액티비티를 띄운다!! => 인텐트에 있어야 한다.
+                    Intent intent = new Intent(context, EditActivity.class);
+
+                    intent.putExtra("id", contact.id);
+                    intent.putExtra("name", contact.name);
+                    intent.putExtra("phone", contact.phone);
+
+                    context.startActivity(intent);
+
+                }
+            });
         }
     }
 

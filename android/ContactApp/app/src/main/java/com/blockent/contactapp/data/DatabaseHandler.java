@@ -90,7 +90,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 // 메모리에 전부 다 남아있어야 한다!!!
 
                 Contact contact = new Contact(id, name, phone);
-                contactArrayList.add(contact);
+                contactArrayList.add(0, contact);
 
             } while (cursor.moveToNext());
         }
