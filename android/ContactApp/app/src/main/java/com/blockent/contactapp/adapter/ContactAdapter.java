@@ -22,6 +22,7 @@ import com.blockent.contactapp.MainActivity;
 import com.blockent.contactapp.R;
 import com.blockent.contactapp.model.Contact;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,9 +104,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                     //    어떤 액티비티가 어떤 액티비티를 띄운다!! => 인텐트에 있어야 한다.
                     Intent intent = new Intent(context, EditActivity.class);
 
-                    intent.putExtra("id", contact.id);
-                    intent.putExtra("name", contact.name);
-                    intent.putExtra("phone", contact.phone);
+                    intent.putExtra("contact", contact);
+
+//                    intent.putExtra("id", contact.id);
+//                    intent.putExtra("name", contact.name);
+//                    intent.putExtra("phone", contact.phone);
+
 
                     context.startActivity(intent);
 

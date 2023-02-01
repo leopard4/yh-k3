@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.blockent.contactapp.model.Contact;
+
 public class EditActivity extends AppCompatActivity {
 
     EditText editName;
@@ -21,11 +23,16 @@ public class EditActivity extends AppCompatActivity {
         editPhone = findViewById(R.id.editPhone);
         btnSave = findViewById(R.id.btnSave);
 
-        int id = getIntent().getIntExtra("id", 0);
-        String name = getIntent().getStringExtra("name");
-        String phone = getIntent().getStringExtra("phone");
+//        int id = getIntent().getIntExtra("id", 0);
+//        String name = getIntent().getStringExtra("name");
+//        String phone = getIntent().getStringExtra("phone");
+//        editName.setText(name);
+//        editPhone.setText(phone);
 
-        
+        Contact contact = (Contact) getIntent().getSerializableExtra("contact");
+
+        editName.setText( contact.name  );
+        editPhone.setText( contact.phone );
 
     }
 }
