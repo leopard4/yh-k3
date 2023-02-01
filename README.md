@@ -170,7 +170,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 실습 6 : https://docs.google.com/presentation/d/12YM4BGCNdWxSw4LQtVwBCUpb0R1gIKmgfm0Az_vxXnw/edit?usp=sharing
 
-
+- 실습 7 : https://docs.google.com/presentation/d/18exxRKr1y4STChbEeq_C9HyEJbORub116XD16bd7wc0/edit?usp=sharing
 
 ---
 
