@@ -51,6 +51,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String keyword = editSearch.getText().toString().trim();
+
+                if(keyword.isEmpty()){
+                    editSearch.setText("");
+                    return;
+                }
+
+                // db 에서 검색한다. => 메모 리스트를 가져온다.
+                DatabaseHandler db = new DatabaseHandler(MainActivity.this);
+                memoList = db.searchMemo(keyword);
+
+                // 화면에 표시
+                adapter = new MemoAdapter(MainActivity.this, memoList);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
+        imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 저장된 모든 메모를 가져온다.
+                DatabaseHandler db = new DatabaseHandler(MainActivity.this);
+                memoList = db.getAllMemos();
+
+                adapter = new MemoAdapter(MainActivity.this, memoList);
+                recyclerView.setAdapter(adapter);
+
+                // 기존에 입력된 검색어도 삭제.
+                editSearch.setText("");
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         // 앱 실행시 저장된 데이터를 화면에 보여준다.
         // DB에 저장된 데이터를 가져온다.
         DatabaseHandler db = new DatabaseHandler(MainActivity.this);

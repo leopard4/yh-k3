@@ -94,7 +94,57 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     }
+
+    public ArrayList<Memo> searchMemo(String keyword) {
+
+        // 1. 데이터베이스를 가져온다.
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // 2. 쿼리문 만든다.
+        String query = "select * from memo " +
+                        "where content like '%"+keyword+"%' or title like '%"+keyword+"%' " +
+                        "order by id desc";
+
+        // 3. 쿼리문을 실행하여, 커서로 받는다.
+        Cursor cursor = db.rawQuery(query, null);
+
+        // 3-1. 여러 데이터를 저장할 어레이리스트 만든다.
+        ArrayList<Memo> memoArrayList = new ArrayList<>();
+
+        // 4. 커서에서 데이터를 뽑아낸다.
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String content = cursor.getString(2);
+
+                Log.i("MEMO_TABLE", id + ", "+title+", "+content);
+
+                // 이 데이터를, 화면에 표시하기 위해서는
+                // 메모리에 전부 다 남아있어야 한다!!!
+
+                Memo memo = new Memo(id, title, content);
+                memoArrayList.add(memo);
+
+            } while (cursor.moveToNext());
+        }
+
+        // 5. db닫기
+        db.close();
+
+        // 6. DB에서 읽어온 연락처 정보를 리턴해야 한다.
+
+        return memoArrayList;
+
+    }
 }
+
+
+
+
+
+
+
 
 
 
