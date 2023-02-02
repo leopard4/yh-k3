@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/405/Documents/android2/13_ContactApp/app/src/main/res/layout/activity_edit.xml" value="0.25" />
+        <entry key="..\:/Users/405/Documents/android2/13_ContactApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/405/Documents/android2/13_ContactApp/app/src/main/res/layout/contact_row.xml" value="0.24537037037037038" />
         <entry key="..\:/Users/405/Documents/android2/ContactApp/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1" />
         <entry key="..\:/Users/405/Documents/android2/ContactApp/app/src/main/res/layout/activity_add.xml" value="0.24791666666666667" />
         <entry key="..\:/Users/405/Documents/android2/ContactApp/app/src/main/res/layout/activity_edit.xml" value="0.25555555555555554" />

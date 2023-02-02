@@ -5,6 +5,7 @@ package com.blockent.contactapp.adapter;
 // 2. 상속받은 클래스가 abstract 이므로, unimplemented method 오버라이드!
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blockent.contactapp.EditActivity;
 import com.blockent.contactapp.MainActivity;
 import com.blockent.contactapp.R;
+import com.blockent.contactapp.data.DatabaseHandler;
 import com.blockent.contactapp.model.Contact;
 
 import java.io.Serializable;
@@ -37,6 +40,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     // 5. 어댑터 클래스의 멤버변수와 생성자를 만들어 준다.
     Context context;
     List<Contact> contactList;
+
+    // 유저가 삭제를 누른 인덱스
+    int deleteIndex;
 
     public ContactAdapter(Context context, List<Contact> contactList) {
         this.context = context;
@@ -113,6 +119,46 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
                     context.startActivity(intent);
 
+                }
+            });
+
+            imgDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // 1. 어느 주소록을 삭제할것인지
+                    //    삭제할 주소록을 가져온다.
+                    deleteIndex = getAdapterPosition();
+
+                    // 2. 알러트 다이얼로그 나온다.
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("주소록 삭제");
+                    builder.setMessage("정말 삭제하시겠습니까?");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // 3. 알러트 다이얼로그에서 Yes 눌렀을때
+                            //    삭세할 주소록을 데이터베이스에서 삭제
+                            DatabaseHandler db = new DatabaseHandler(context);
+
+                            Contact contact = contactList.get(deleteIndex);
+
+                            db.deleteContact(contact);
+
+                            // 알러트 다이얼로그는 액티비티가 아니므로
+                            // 메인액티비티의 onResume 함수가 실행안된다.
+                            // 따라서 화면갱신이 안된다.
+                            
+                            // 즉, 디비에 저장된 데이터 삭제했으니,
+                            // 메모리에 저장된 데이터도 삭제한다.
+                            contactList.remove(deleteIndex);
+                            // 데이터가 변경되었으니, 화면 갱신하라고 함수호출
+                            notifyDataSetChanged();
+
+                        }
+                    });
+                    builder.setNegativeButton("NO", null);
+                    builder.show();
                 }
             });
         }

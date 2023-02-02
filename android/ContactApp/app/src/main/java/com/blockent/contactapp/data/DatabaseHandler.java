@@ -46,7 +46,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // CRUD 관련된 SQL문이 들어간,
     // 메소드를 만들면 된다.
 
-    // 1. 연락처 추가하는 메소드(함수)
+    // 1. 연락처 추가하는 메소드(함수)  C
     public void addContact(Contact contact){
         // 1. 데이터베이스를 가져온다.
         SQLiteDatabase db = this.getWritableDatabase();
@@ -60,9 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-
-
-    // 2. 저장된 연락처를 모두 가져오는 메소드
+    // 2. 저장된 연락처를 모두 가져오는 메소드 R
     public ArrayList<Contact> getAllContacts(){
 
         // 1. 데이터베이스를 가져온다.
@@ -104,6 +102,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+
+    // 3. 연락처 업데이트하는 메소드  U
+    public void updateContact(Contact contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "update contact " +
+                        "set name = ? , phone = ? " +
+                        "where id = ? ";
+
+        db.execSQL(query, new String[] {contact.name, contact.phone, contact.id+""} );
+
+        db.close();
+    }
+
+    // 4. 연락처 삭제하는 메소드 D
+    public void deleteContact(Contact contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "delete from contact " +
+                        "where id = ?";
+        String[] args = new String[]{ contact.id+"" };
+
+        db.execSQL(query, args);
+        db.close();
+    }
 }
 
 
