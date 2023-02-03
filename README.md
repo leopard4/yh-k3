@@ -172,8 +172,15 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 실습 7 : https://docs.google.com/presentation/d/18exxRKr1y4STChbEeq_C9HyEJbORub116XD16bd7wc0/edit?usp=sharing
 
-- 실습 8 : 실습 8 : https://docs.google.com/presentation/d/1jwPbog1NVdTyqSh9q_v2jkcS738Qsq3dq66hhrJ7E4Q/edit?usp=sharing
+- 실습 8 : https://docs.google.com/presentation/d/1jwPbog1NVdTyqSh9q_v2jkcS738Qsq3dq66hhrJ7E4Q/edit?usp=sharing
 
+- 실습 9 : https://docs.google.com/presentation/d/1sbF8aejWEQnPiWLmZDB_pmwW8BSTCLOYR76FGJHUNF8/edit?usp=share_link
+
+- Json 샘플 URL 1 : https://jsonplaceholder.typicode.com
+
+- 실습 10 : https://docs.google.com/presentation/d/10kvtW8KPNxwYRZwxn5AccK2XpCUd73iP4HAyk2bULPc/edit?usp=sharing
+
+실습 10용 URL : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/employees.json
 
 ---
 
