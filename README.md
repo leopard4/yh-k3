@@ -182,9 +182,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 실습 10용 URL : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/employees.json
 
-- 액션바와 메뉴, FAB
-
-- 실습 10 업그레이드 하기 
+- 액션바와 메뉴, FAB 을 적용하여 실습 10 업그레이드 하기 
 
 
 
