@@ -176,6 +176,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 실습 9 : https://docs.google.com/presentation/d/1sbF8aejWEQnPiWLmZDB_pmwW8BSTCLOYR76FGJHUNF8/edit?usp=share_link
 
+- Json 샘플 URL 1 : https://jsonplaceholder.typicode.com
 
 ---
 
