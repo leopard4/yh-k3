@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // 내가 실행한 액티비티로부터, 데이터를 다시 받아오는 경우에 작성하는 코드
-    ActivityResultLauncher<Intent> launcher =
+    public ActivityResultLauncher<Intent> launcher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                     new ActivityResultCallback<ActivityResult>() {
                         @Override
@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                             if(result.getResultCode() == AddActivity.SAVE){
                                 Employee employee = (Employee) result.getData().getSerializableExtra("employee");
                                 employeeList.add(employee);
+                                adapter.notifyDataSetChanged();
+                            } else if(result.getResultCode() == EditActivity.EDIT){
+                                Employee employee = (Employee) result.getData().getSerializableExtra("employee");
+                                int index = result.getData().getIntExtra("index", -1);
+                                employeeList.set(index, employee);
                                 adapter.notifyDataSetChanged();
                             }
                         }

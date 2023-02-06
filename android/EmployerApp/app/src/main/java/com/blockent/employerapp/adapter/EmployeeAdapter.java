@@ -1,6 +1,7 @@
 package com.blockent.employerapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blockent.employerapp.EditActivity;
+import com.blockent.employerapp.MainActivity;
 import com.blockent.employerapp.R;
 import com.blockent.employerapp.model.Employee;
 
@@ -61,6 +65,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         TextView txtAge;
         TextView txtSalary;
         ImageView imgDelete;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +74,24 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             txtAge = itemView.findViewById(R.id.txtAge);
             txtSalary = itemView.findViewById(R.id.txtSalary);
             imgDelete = itemView.findViewById(R.id.imgDelete);
+            cardView = itemView.findViewById(R.id.cardView);
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    int index = getAdapterPosition();
+                    Employee employee = employeeList.get(index);
+
+                    // 새로운 액티비티에 위의 정보를 넘겨서 실행한다.
+                    Intent intent = new Intent(context, EditActivity.class);
+                    intent.putExtra("employee", employee);
+                    intent.putExtra("index", index);
+
+                    ((MainActivity)context).launcher.launch(intent);
+
+                }
+            });
 
         }
     }
