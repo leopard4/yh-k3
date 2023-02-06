@@ -176,6 +176,8 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 실습 9 : https://docs.google.com/presentation/d/1sbF8aejWEQnPiWLmZDB_pmwW8BSTCLOYR76FGJHUNF8/edit?usp=share_link
 
+- 안드로이드 스튜디오에서 github 로 sharing 하기 (VCS 메뉴 이용)
+
 - Json 샘플 URL 1 : https://jsonplaceholder.typicode.com
 
 - 실습 10 : https://docs.google.com/presentation/d/10kvtW8KPNxwYRZwxn5AccK2XpCUd73iP4HAyk2bULPc/edit?usp=sharing
