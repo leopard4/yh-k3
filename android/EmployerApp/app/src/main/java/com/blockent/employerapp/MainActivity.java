@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -25,6 +28,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.blockent.employerapp.adapter.EmployeeAdapter;
 import com.blockent.employerapp.model.Employee;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnAdd;
     ProgressBar progressBar;
+    FloatingActionButton fab;
 
     RecyclerView recyclerView;
     EmployeeAdapter adapter;
@@ -77,8 +82,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 액션바의 타이틀 변경법
+        getSupportActionBar().setTitle("직원리스트");
+
         btnAdd = findViewById(R.id.btnAdd);
         progressBar = findViewById(R.id.progressBar);
+        fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -91,6 +100,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 launcher.launch(intent);
 
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                launcher.launch(intent);
             }
         });
 
@@ -149,7 +166,40 @@ public class MainActivity extends AppCompatActivity {
         queue.add(request);
 
     }
+
+
+    // 액션바의 메뉴는, 전용 함수가 있다.
+    // 이 함수를 오버라이딩 해야 한다.
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        // 액션바에 메뉴가 나오도록 설정한다.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    // 액션바의 메뉴를 탭했을때, 실행하는 함수가 있다.
+    // 이 함수를 오버라이딩 해야 한다.
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.menuAdd){
+            // AddActivity 실행하는 코드
+
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            launcher.launch(intent);
+            
+        }else if (itemId == R.id.menuAbout){
+            // AboutActiviy 를 실행하는 코드
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
+
+
+
 
 
 

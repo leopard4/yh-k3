@@ -1,14 +1,17 @@
 package com.blockent.employerapp.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +27,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
     Context context;
     ArrayList<Employee> employeeList;
+    int deleteIndex;
 
     public EmployeeAdapter(Context context, ArrayList<Employee> employeeList) {
         this.context = context;
@@ -90,6 +94,26 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
                     ((MainActivity)context).launcher.launch(intent);
 
+                }
+            });
+
+            imgDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deleteIndex = getAdapterPosition();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("정보 삭제");
+                    builder.setMessage("정말 삭제하시겠습니까?");
+                    builder.setNegativeButton("NO", null);
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            employeeList.remove(deleteIndex);
+                            notifyDataSetChanged();
+                        }
+                    });
+                    builder.show();
                 }
             });
 

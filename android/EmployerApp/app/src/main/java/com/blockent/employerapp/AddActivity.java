@@ -26,6 +26,10 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        getSupportActionBar().setTitle("직원 추가");
+        // 아래 코드는 돌아갈수 있는 화살표만 화면에 보여준다.
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         editName = findViewById(R.id.editName);
         editSalary = findViewById(R.id.editSalary);
         editAge = findViewById(R.id.editAge);
@@ -61,4 +65,18 @@ public class AddActivity extends AppCompatActivity {
             }
         });
     }
+
+    // 액션바의 돌아가는 화살표를 눌렀을때의 이벤트를 처리하는
+    // 함수를 오버라이딩 해야 한다.
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }
+
+
+
+
+
+
