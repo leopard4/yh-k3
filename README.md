@@ -190,6 +190,11 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 실습 11 URL : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/posting.json
 
+- 실습 12 https://docs.google.com/presentation/d/1iZg-czwOLbAuztrNx80AB-fuhB99zAbv1TB2PAl6T34/edit?usp=sharing
+
+실습 12 URL : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/photos.json
+
+
 
 ---
 
