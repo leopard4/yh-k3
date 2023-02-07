@@ -201,6 +201,9 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 실습 12 URL : https://block1-image-test.s3.ap-northeast-2.amazonaws.com/photos.json
 
 
+- 안드로이드의 문자, 웹, 전화 등등의 인텐트 사용법 : https://crone.tistory.com/511
+
+- 실습 13 : https://docs.google.com/presentation/d/1y7ovTm8xHTe3CL5CUNb2IWDbV1bmZezWxwkMTz7Y_qE/edit?usp=sharing
 
 ---
 
