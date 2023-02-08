@@ -207,6 +207,12 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - 실습 14 : https://docs.google.com/presentation/d/11WHvpWFQZQx8LnDYbAGkZx41VT-mpEHSj-AOHoiXjqg/edit?usp=sharing
 
+- retrofit 라이브러리 사용법 : https://docs.google.com/presentation/d/1O_p-iWCSxDGU-t0Vh2MKghxzbhQEUlBangQKGYeOxPo/edit?usp=sharing
+
+- 탭바 구현 : https://docs.google.com/presentation/d/16VXfXSDY_mBRkJOXHKTN22TGLO0ZBjQCaJ4JYt4qSAQ/edit?usp=sharing
+
+- 탭 버튼 아이콘 색 바꾸기 (셀렉터 이용방법) : https://lcw126.tistory.com/330
+
 ---
 
 
