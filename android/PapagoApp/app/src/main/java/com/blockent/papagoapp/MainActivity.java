@@ -1,9 +1,13 @@
 package com.blockent.papagoapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,10 +23,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.blockent.papagoapp.config.Config;
+import com.blockent.papagoapp.model.History;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -35,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     TextView txtResult;
 
     final String URL = "https://openapi.naver.com/v1/papago/n2mt";
+
+    String text;
+    String target;
+    ArrayList<History> historyList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 1. 에디티텍스트에서 유저가 작성한 글을 가져온다.
-                String text = editText.getText().toString().trim();
+                text = editText.getText().toString().trim();
 
                 if(text.isEmpty()){
                     return;
                 }
                 // 2. 어떤 언어로 번역할지를 라디오버튼 정보 가져온다.
                 int radioBtnId = radioGroup.getCheckedRadioButtonId();
-                String target;
+
                 if(radioBtnId == R.id.radioBtn1){
                     target = "en";
                 }else if(radioBtnId == R.id.radioBtn2){
@@ -103,6 +113,12 @@ public class MainActivity extends AppCompatActivity {
 
                                     txtResult.setText(result);
 
+                                    // 히스토리 객체를 생성한다.
+                                    History history = new History(text, result, target);
+
+                                    // 어레이리스트에 넣어준다.
+                                    historyList.add(0, history);
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     return;
@@ -134,6 +150,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.menuHistory){
+            // 새로운 액티비티를 띄운다.
+
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            intent.putExtra("historyList", historyList);
+            startActivity(intent);
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 
