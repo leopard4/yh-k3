@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -102,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
         String url = Config.BASE_URL + Config.PATH
                     + "?key=" + Config.API_KEY
                     + "&part=snippet&q="+keyword
-                    +"&maxResults=20";
+                    +"&maxResults=20&type=video";
+
+        Log.i("YOUTUBE_APP", url);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -114,11 +117,16 @@ public class MainActivity extends AppCompatActivity {
 
                         progressBar.setVisibility(View.GONE);
 
+                        videoList.clear();
+                        pageToken = null;
+
                         try {
 
                             pageToken = response.getString("nextPageToken");
 
                             JSONArray items = response.getJSONArray("items");
+
+                            Log.i("YOUTUBE_APP", items.toString());
 
                             for(int i = 0; i < items.length(); i++){
                                 JSONObject item = items.getJSONObject(i);
@@ -136,11 +144,18 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         } catch (JSONException e) {
+                            Log.i("YOUTUBE_APP", e.toString());
                             return;
                         }
 
-                        adapter = new VideoAdapter(MainActivity.this, videoList);
-                        recyclerView.setAdapter(adapter);
+                        if(adapter == null){
+                            Log.i("YOUTUBE_APP", "adapter == null");
+                            adapter = new VideoAdapter(MainActivity.this, videoList);
+                            recyclerView.setAdapter(adapter);
+                        } else {
+                            Log.i("YOUTUBE_APP", "adapter != null");
+                            adapter.notifyDataSetChanged();
+                        }
 
                     }
                 },
@@ -162,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         String url = Config.BASE_URL + Config.PATH
                 + "?key=" + Config.API_KEY
                 + "&part=snippet&q="+keyword
-                +"&maxResults=20&pageToken="+pageToken;
+                +"&type=video&maxResults=20&pageToken="+pageToken;
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
