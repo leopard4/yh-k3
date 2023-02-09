@@ -1,12 +1,18 @@
 package com.blockent.memoapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -15,9 +21,11 @@ import android.widget.Toast;
 import com.blockent.memoapp.adapter.MemoAdapter;
 import com.blockent.memoapp.api.MemoApi;
 import com.blockent.memoapp.api.NetworkClient;
+import com.blockent.memoapp.api.UserApi;
 import com.blockent.memoapp.config.Config;
 import com.blockent.memoapp.model.Memo;
 import com.blockent.memoapp.model.MemoList;
+import com.blockent.memoapp.model.UserRes;
 
 import java.util.ArrayList;
 
@@ -36,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Memo> memoArrayList = new ArrayList<>();
 
     String accessToken;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +117,90 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.menuLogout){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("로그아웃");
+            builder.setMessage("로그아웃 하시겠습니까?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    showProgress("로그아웃 중...");
+
+                    Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+
+                    UserApi api = retrofit.create(UserApi.class);
+
+                    Call<UserRes> call = api.logout("Bearer "+accessToken);
+
+                    call.enqueue(new Callback<UserRes>() {
+                        @Override
+                        public void onResponse(Call<UserRes> call, Response<UserRes> response) {
+                            dismissProgress();
+
+                            if(response.isSuccessful()){
+
+                                // 쉐어드 프리퍼런스에 저장한 토큰을 초기화!
+                                SharedPreferences sp = getApplication().getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString(Config.ACCESS_TOKEN, "");
+                                editor.apply();
+
+                                // 기획 : 앱종료
+                                // finish();
+
+                                // 기획 : 로그아웃하면, 로그인 화면을 띄우도록.
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+
+                                finish();
+
+                            }else{
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserRes> call, Throwable t) {
+                            dismissProgress();
+                        }
+                    });
+
+
+                }
+            });
+            builder.setNegativeButton("NO", null);
+            builder.show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // 네트워크 로직 처리시에 화면에 보여주는 함수
+    void showProgress(String message){
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(message);
+        dialog.show();
+    }
+
+    // 로직처리가 끝나면 화면에서 사라지는 함수
+    void dismissProgress(){
+        dialog.dismiss();
     }
 }
 
