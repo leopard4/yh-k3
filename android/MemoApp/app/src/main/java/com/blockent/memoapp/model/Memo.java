@@ -1,14 +1,15 @@
 package com.blockent.memoapp.model;
 
-public class Memo {
+import java.io.Serializable;
+
+public class Memo implements Serializable {
 
     private int id;
     private String title;
+    private String datetime;
     private String content;
-
-    public Memo(){
-
-    }
+    private String createdAt;
+    private String updatedAt;
 
     public int getId() {
         return id;
@@ -16,17 +17,6 @@ public class Memo {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Memo(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
-    public Memo(int id, String title, String content) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
     }
 
     public String getTitle() {
@@ -37,11 +27,35 @@ public class Memo {
         this.title = title;
     }
 
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

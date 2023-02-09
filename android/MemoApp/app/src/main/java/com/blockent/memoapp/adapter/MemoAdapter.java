@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blockent.memoapp.MainActivity;
 import com.blockent.memoapp.R;
 import com.blockent.memoapp.model.Memo;
 
@@ -29,7 +28,6 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
     @NonNull
     @Override
     public MemoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // xml 파일을 연결하는 작업
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.memo_row, parent, false);
         return new MemoAdapter.ViewHolder(view);
@@ -37,11 +35,17 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MemoAdapter.ViewHolder holder, int position) {
-        // 뷰에 데이터를 셋팅한다!
         Memo memo = memoList.get(position);
 
-        holder.txtTitle.setText( memo.getTitle() );
-        holder.txtContent.setText( memo.getContent() );
+        holder.txtTitle.setText(memo.getTitle());
+        // "2023-08-03T11:30:00"
+        // "2023-08-03 11:30:00"
+        // "2023-08-03 11:30"
+        String date = memo.getDatetime().replace("T", " ")
+                        .substring(0, 15+1);
+        holder.txtDate.setText(date);
+        holder.txtContent.setText(memo.getContent());
+
     }
 
     @Override
@@ -52,6 +56,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView txtTitle;
+        TextView txtDate;
         TextView txtContent;
         ImageView imgDelete;
 
@@ -59,8 +64,10 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
             super(itemView);
 
             txtTitle = itemView.findViewById(R.id.txtTitle);
+            txtDate = itemView.findViewById(R.id.txtDate);
             txtContent = itemView.findViewById(R.id.txtContent);
             imgDelete = itemView.findViewById(R.id.imgDelete);
+
         }
     }
 }
