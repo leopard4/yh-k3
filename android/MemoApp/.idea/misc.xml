@@ -3,10 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/405/Documents/android2/MemoApp/app/src/main/res/drawable-v24/ic_baseline_close_24.xml" value="0.1265" />
-        <entry key="..\:/Users/405/Documents/android2/MemoApp/app/src/main/res/layout/activity_add.xml" value="0.24791666666666667" />
-        <entry key="..\:/Users/405/Documents/android2/MemoApp/app/src/main/res/layout/activity_main.xml" value="0.24310520939734423" />
-        <entry key="..\:/Users/405/Documents/android2/MemoApp/app/src/main/res/layout/memo_row.xml" value="0.1" />
+        <entry key="..\:/Users/405/Documents/android2/MemoApp/app/src/main/res/layout/activity_register.xml" value="0.2490740740740741" />
       </map>
     </option>
   </component>
