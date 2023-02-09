@@ -209,6 +209,15 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 - retrofit 라이브러리 사용법 : https://docs.google.com/presentation/d/1O_p-iWCSxDGU-t0Vh2MKghxzbhQEUlBangQKGYeOxPo/edit?usp=sharing
 
+- 레트로핏 라이브러리 
+
+
+implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+
+
 - 탭바 구현 : https://docs.google.com/presentation/d/16VXfXSDY_mBRkJOXHKTN22TGLO0ZBjQCaJ4JYt4qSAQ/edit?usp=sharing
 
 - 탭 버튼 아이콘 색 바꾸기 (셀렉터 이용방법) : https://lcw126.tistory.com/330
