@@ -3,7 +3,9 @@ package com.blockent.memoapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +13,20 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.blockent.memoapp.api.MemoApi;
+import com.blockent.memoapp.api.NetworkClient;
+import com.blockent.memoapp.config.Config;
+import com.blockent.memoapp.model.Memo;
+import com.blockent.memoapp.model.Res;
 
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -21,6 +35,9 @@ public class AddActivity extends AppCompatActivity {
     Button btnDate;
     Button btnTime;
     Button btnSave;
+    private String date = "";
+    private String time = "";
+    private ProgressDialog dialog;
 
 
     @Override
@@ -63,7 +80,7 @@ public class AddActivity extends AppCompatActivity {
                                     strDay= ""+i2;
                                 }
 
-                                String date = i + "-" + strMonth + "-" + strDay;
+                                date = i + "-" + strMonth + "-" + strDay;
                                 btnDate.setText(date);
 
                             }
@@ -99,7 +116,7 @@ public class AddActivity extends AppCompatActivity {
                                 }else{
                                     strMin = ""+i1;
                                 }
-                                String time = strHour+":"+strMin;
+                                time = strHour+":"+strMin;
                                 btnTime.setText(time);
                             }
                         },
@@ -110,6 +127,75 @@ public class AddActivity extends AppCompatActivity {
 
             }
         });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = editTitle.getText().toString().trim();
+                String content = editContent.getText().toString().trim();
+
+                if(title.isEmpty() || content.isEmpty() ||
+                    date.isEmpty() || time.isEmpty()){
+                    Toast.makeText(AddActivity.this, "모든 항목은 필수입니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String datetime = date + " " + time;
+
+                // 네트워크 호출하는 코드
+                showProgress("메모 저장중...");
+
+                Retrofit retrofit = NetworkClient.getRetrofitClient(AddActivity.this);
+
+                MemoApi api = retrofit.create(MemoApi.class);
+
+                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+                Memo memo = new Memo();
+                memo.setTitle(title);
+                memo.setContent(content);
+                memo.setDatetime(datetime);
+
+                Call<Res> call = api.addMemo(accessToken, memo);
+                
+                call.enqueue(new Callback<Res>() {
+                    @Override
+                    public void onResponse(Call<Res> call, Response<Res> response) {
+                        dismissProgress();
+
+                        if(response.isSuccessful()){
+
+                            finish();
+
+                        }else{
+                            Toast.makeText(AddActivity.this, "정상동작하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Res> call, Throwable t) {
+                        dismissProgress();
+                    }
+                });
+
+            }
+        });
+    }
+
+    // 네트워크 로직 처리시에 화면에 보여주는 함수
+    void showProgress(String message){
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(message);
+        dialog.show();
+    }
+
+    // 로직처리가 끝나면 화면에서 사라지는 함수
+    void dismissProgress(){
+        dialog.dismiss();
     }
 }
 

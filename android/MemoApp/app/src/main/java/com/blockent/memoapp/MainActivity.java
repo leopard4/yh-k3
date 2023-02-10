@@ -83,9 +83,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         // 네트워크로부터 내 메모를 가져온다.
         getNetworkData();
-
     }
 
     private void getNetworkData() {
