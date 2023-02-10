@@ -221,6 +221,7 @@ implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
+- 안드로이드 카메라/갤러리 처리 : https://docs.google.com/presentation/d/1vGdoKS1amPNqYR416mFtNaxwy6NbtwPljz9Ty1qdCiw/edit?usp=sharing
 
 
 - 탭바 구현 : https://docs.google.com/presentation/d/16VXfXSDY_mBRkJOXHKTN22TGLO0ZBjQCaJ4JYt4qSAQ/edit?usp=sharing
