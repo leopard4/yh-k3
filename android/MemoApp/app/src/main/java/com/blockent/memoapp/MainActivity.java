@@ -25,6 +25,7 @@ import com.blockent.memoapp.api.UserApi;
 import com.blockent.memoapp.config.Config;
 import com.blockent.memoapp.model.Memo;
 import com.blockent.memoapp.model.MemoList;
+import com.blockent.memoapp.model.Res;
 import com.blockent.memoapp.model.UserRes;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     int offset = 0;
     int limit = 7;
     int count = 0;
+    private int deleteIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -294,6 +296,41 @@ public class MainActivity extends AppCompatActivity {
     // 로직처리가 끝나면 화면에서 사라지는 함수
     void dismissProgress(){
         dialog.dismiss();
+    }
+
+    public void deleteMemo(int index) {
+        // 네트워크로 메모 삭제하는 코드 작성
+
+        deleteIndex = index;
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+        MemoApi api = retrofit.create(MemoApi.class);
+
+        Memo memo = memoArrayList.get(index);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
+
+        Call<Res> call = api.deleteMemo(memo.getId(), accessToken);
+        call.enqueue(new Callback<Res>() {
+            @Override
+            public void onResponse(Call<Res> call, Response<Res> response) {
+                if(response.isSuccessful()){
+
+                    memoArrayList.remove(deleteIndex);
+                    adapter.notifyDataSetChanged();
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Res> call, Throwable t) {
+
+            }
+        });
+
     }
 }
 

@@ -6,7 +6,7 @@ public class Memo implements Serializable {
 
     private int id;
     private String title;
-    private String datetime;
+    private String datetime;  // 2023-08-03T11:30:00
     private String content;
     private String createdAt;
     private String updatedAt;
