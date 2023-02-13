@@ -1,4 +1,4 @@
-package com.blockent.camera;
+package com.blockent.cameraapp;
 
 import org.junit.Test;
 

@@ -1,7 +1,6 @@
-package com.blockent.camera;
+package com.blockent.cameraapp;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -19,7 +18,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -34,7 +32,6 @@ import android.widget.Toast;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -46,9 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     ImageView imageView;
-    // 사진관련된 변수들
-    private File photoFile;
 
+    File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,36 +60,46 @@ public class MainActivity extends AppCompatActivity {
                 // 버튼을 누르면, 카메라에서 선택인지 앨범에서 선택인지를
                 // 고를 수 있도록 알러트 다이얼로그를 띄운다.
                 showDialog();
-
-                // 카메라를 선택하면, 사진찍는 것으로
-                // 앨범을 선택하면, 앨범에서 사진 선택할수 있도록 하고
-
-                // 그 결과는 이미지뷰에 보여주도록 개발.
             }
         });
 
     }
 
-    // 알러트 다이얼로그 띄우는 함수
-    void showDialog(){
+    private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(R.string.alert_title);
         builder.setItems(R.array.alert_photo, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-                if (i == 0){
-                    // todo : 사진찍는 코드 실행
+                
+                if(i == 0){
+                    // 사진찍는 코드를 실행
                     camera();
-
-                } else if (i == 1){
-                    // todo : 앨범에서 사진 가져오는 코드 실행
+                } else if(i == 1){
+                    // 앨범에서 사진 가져오는 코드 실행
                     album();
                 }
+                                
             }
         });
+
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void album(){
+        if(checkPermission()){
+            displayFileChoose();
+        }else{
+            requestPermission();
+        }
+    }
+
+    private void displayFileChoose() {
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i, "SELECT IMAGE"), 300);
     }
 
     private void camera(){
@@ -116,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 photoFile = getPhotoFile(fileName);
 
                 Uri fileProvider = FileProvider.getUriForFile(MainActivity.this,
-                        "com.blockent.camera.fileprovider", photoFile);
+                        "com.blockent.cameraapp.fileprovider", photoFile);
                 i.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
                 startActivityForResult(i, 100);
 
@@ -128,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     private File getPhotoFile(String fileName) {
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         try{
@@ -138,19 +145,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void album(){
-        if(checkPermission()){
-            displayFileChoose();
-        }else{
-            requestPermission();
-        }
-    }
     private void requestPermission() {
         if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            Log.i("DEBUGGING5", "true");
             Toast.makeText(MainActivity.this, "권한 수락이 필요합니다.",
                     Toast.LENGTH_SHORT).show();
         }else{
+            Log.i("DEBUGGING6", "false");
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 500);
         }
@@ -166,12 +168,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void displayFileChoose() {
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(i, "SELECT IMAGE"), 300);
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -202,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 100 && resultCode == RESULT_OK){
 
             Bitmap photo = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
@@ -231,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
             photo = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
 
             imageView.setImageBitmap(photo);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             // 네트워크로 데이터 보낸다.
 
@@ -269,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 imageView.setImageBitmap(photo);
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 //                imageView.setImageBitmap( getBitmapAlbum( imageView, albumUri ) );
 
@@ -281,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
 
@@ -343,80 +338,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
-    //이미지뷰에 뿌려질 앨범 비트맵 반환
-    public Bitmap getBitmapAlbum( View targetView, Uri uri ) {
-        try {
-            ParcelFileDescriptor parcelFileDescriptor = getContentResolver( ).openFileDescriptor( uri, "r" );
-            if ( parcelFileDescriptor == null ) return null;
-            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor( );
-            if ( fileDescriptor == null ) return null;
-
-            int targetW = targetView.getWidth( );
-            int targetH = targetView.getHeight( );
-
-            BitmapFactory.Options options = new BitmapFactory.Options( );
-            options.inJustDecodeBounds = true;
-
-            BitmapFactory.decodeFileDescriptor( fileDescriptor, null, options );
-
-            int photoW = options.outWidth;
-            int photoH = options.outHeight;
-
-            int scaleFactor = Math.min( photoW / targetW, photoH / targetH );
-            if ( scaleFactor >= 8 ) {
-                options.inSampleSize = 8;
-            } else if ( scaleFactor >= 4 ) {
-                options.inSampleSize = 4;
-            } else {
-                options.inSampleSize = 2;
-            }
-            options.inJustDecodeBounds = false;
-
-            Bitmap reSizeBit = BitmapFactory.decodeFileDescriptor( fileDescriptor, null, options );
-
-            ExifInterface exifInterface = null;
-            try {
-                if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) {
-                    exifInterface = new ExifInterface( fileDescriptor );
-                }
-            } catch ( IOException e ) {
-                e.printStackTrace( );
-            }
-
-            int exifOrientation;
-            int exifDegree = 0;
-
-            //사진 회전값 구하기
-            if ( exifInterface != null ) {
-                exifOrientation = exifInterface.getAttributeInt( ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL );
-
-                if ( exifOrientation == ExifInterface.ORIENTATION_ROTATE_90 ) {
-                    exifDegree = 90;
-                } else if ( exifOrientation == ExifInterface.ORIENTATION_ROTATE_180 ) {
-                    exifDegree = 180;
-                } else if ( exifOrientation == ExifInterface.ORIENTATION_ROTATE_270 ) {
-                    exifDegree = 270;
-                }
-            }
-
-            parcelFileDescriptor.close( );
-            Matrix matrix = new Matrix( );
-            matrix.postRotate( exifDegree );
-
-            Bitmap reSizeExifBitmap = Bitmap.createBitmap( reSizeBit, 0, 0, reSizeBit.getWidth( ), reSizeBit.getHeight( ), matrix, true );
-            return reSizeExifBitmap;
-
-        } catch ( Exception e ) {
-            e.printStackTrace( );
-            return null;
-        }
-
-
-    }
-
 }
-
 
 
 
