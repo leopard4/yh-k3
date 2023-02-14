@@ -1,6 +1,7 @@
 package com.blockent.postingapp.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blockent.postingapp.R;
+import com.blockent.postingapp.api.NetworkClient;
+import com.blockent.postingapp.api.PostingApi;
+import com.blockent.postingapp.config.Config;
 import com.blockent.postingapp.model.Posting;
+import com.blockent.postingapp.model.Res;
 import com.bumptech.glide.Glide;
 
 import java.text.ParseException;
@@ -22,6 +27,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import retrofit2.http.POST;
 
 public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHolder>  {
@@ -31,6 +40,8 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
 
     SimpleDateFormat sf;
     SimpleDateFormat df;
+
+    Posting selectedPosting;
 
     public PostingAdapter(Context context, ArrayList<Posting> postingList) {
         this.context = context;
@@ -102,6 +113,89 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
             txtCreatedAt = itemView.findViewById(R.id.txtCreatedAt);
             imgLike = itemView.findViewById(R.id.imgLike);
             imgPhoto = itemView.findViewById(R.id.imgPhoto);
+
+            imgLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // 1. 어느번째의 데이터의 좋아요를 누른것인지 확인
+                    int index = getAdapterPosition();
+
+                    selectedPosting = postingList.get(index);
+
+                    // 2. 해당행의 좋아요가 이미 좋아요인지 아닌지 파악
+                    if (selectedPosting.getIsLike()  == 0){
+                        // 3. 좋아요 API를 호출
+                        Retrofit retrofit = NetworkClient.getRetrofitClient(context);
+
+                        PostingApi api = retrofit.create(PostingApi.class);
+
+                        SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
+                        String accessToken = "Bearer " +sp.getString(Config.ACCESS_TOKEN, "");
+
+                        Call<Res> call = api.setLike(accessToken, selectedPosting.getPostingId());
+
+                        call.enqueue(new Callback<Res>() {
+                            @Override
+                            public void onResponse(Call<Res> call, Response<Res> response) {
+                                if(response.isSuccessful()){
+
+                                    // 4. 화면에 결과를 표시
+                                    selectedPosting.setIsLike(1);
+
+                                    notifyDataSetChanged();
+
+                                }else{
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Res> call, Throwable t) {
+
+                            }
+                        });
+
+
+                    }else{
+                        // 3. 좋아요 해제 API를 호출
+
+                        Retrofit retrofit = NetworkClient.getRetrofitClient(context);
+
+                        PostingApi api = retrofit.create(PostingApi.class);
+
+                        SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
+                        String accessToken = "Bearer " +sp.getString(Config.ACCESS_TOKEN, "");
+
+                        Call<Res> call = api.deleteLike(accessToken, selectedPosting.getPostingId());
+
+                        call.enqueue(new Callback<Res>() {
+                            @Override
+                            public void onResponse(Call<Res> call, Response<Res> response) {
+                                if(response.isSuccessful()){
+
+                                    // 4. 화면에 결과를 표시
+                                    selectedPosting.setIsLike(0);
+
+                                    notifyDataSetChanged();
+
+                                }else{
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Res> call, Throwable t) {
+
+                            }
+                        });
+
+
+
+                    }
+
+
+                }
+            });
 
         }
     }
