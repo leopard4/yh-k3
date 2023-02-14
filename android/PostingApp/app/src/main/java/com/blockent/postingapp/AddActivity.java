@@ -102,7 +102,7 @@ public class AddActivity extends AppCompatActivity {
                 PostingApi api = retrofit.create(PostingApi.class);
 
                 // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
-                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/*"));
+                RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/jpg"));
                 MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", photoFile.getName(), fileBody);
 
                 // 멀티파트로 텍스트를 보내는 경우, 텍스트 파라미터 만든다.
