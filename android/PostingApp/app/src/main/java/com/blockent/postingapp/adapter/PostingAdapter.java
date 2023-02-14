@@ -16,7 +16,11 @@ import com.blockent.postingapp.R;
 import com.blockent.postingapp.model.Posting;
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 import retrofit2.http.POST;
 
@@ -25,9 +29,19 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
     Context context;
     ArrayList<Posting> postingList;
 
+    SimpleDateFormat sf;
+    SimpleDateFormat df;
+
     public PostingAdapter(Context context, ArrayList<Posting> postingList) {
         this.context = context;
         this.postingList = postingList;
+
+        // UTC => Local Time
+        sf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        df.setTimeZone(TimeZone.getDefault());
+
     }
 
     @NonNull
@@ -44,17 +58,17 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
 
         holder.txtContent.setText(posting.getContent());
         holder.txtEmail.setText(posting.getEmail());
-        holder.txtCreatedAt.setText(posting.getCreatedAt());
 
-        Log.i("POSTING_APP", posting.getIsLike() +"");
+        try {
+            Date date = sf.parse(posting.getCreatedAt());
+            holder.txtCreatedAt.setText(  df.format(date)  );
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         if(posting.getIsLike() == 1){
-
-            Log.i("POSTING_APP", "isLike == 1");
-
             holder.imgLike.setImageResource(R.drawable.ic_thumb_up_2);
         }else {
-            Log.i("POSTING_APP", "isLike == 0");
             holder.imgLike.setImageResource(R.drawable.ic_thumb_up_1);
         }
 
