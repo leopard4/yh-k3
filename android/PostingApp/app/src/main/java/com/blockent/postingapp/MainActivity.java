@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.blockent.postingapp.api.PostingApi;
 import com.blockent.postingapp.config.Config;
 import com.blockent.postingapp.model.Posting;
 import com.blockent.postingapp.model.PostingList;
+import com.blockent.postingapp.model.Res;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     int count = 0;
     int offset = 0;
     int limit = 7;
+    private Posting selectedPosting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,4 +129,90 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void likeProcess(int index){
+
+        selectedPosting = postingList.get(index);
+
+        // 2. 해당행의 좋아요가 이미 좋아요인지 아닌지 파악
+        if (selectedPosting.getIsLike()  == 0){
+            // 3. 좋아요 API를 호출
+            Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+
+            PostingApi api = retrofit.create(PostingApi.class);
+
+            SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
+            String accessToken = "Bearer " +sp.getString(Config.ACCESS_TOKEN, "");
+
+            Call<Res> call = api.setLike(accessToken, selectedPosting.getPostingId());
+
+            call.enqueue(new Callback<Res>() {
+                @Override
+                public void onResponse(Call<Res> call, Response<Res> response) {
+                    if(response.isSuccessful()){
+
+                        // 4. 화면에 결과를 표시
+                        selectedPosting.setIsLike(1);
+
+                        adapter.notifyDataSetChanged();
+
+                    }else{
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Res> call, Throwable t) {
+
+                }
+            });
+
+
+        }else{
+            // 3. 좋아요 해제 API를 호출
+
+            Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+
+            PostingApi api = retrofit.create(PostingApi.class);
+
+            SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
+            String accessToken = "Bearer " +sp.getString(Config.ACCESS_TOKEN, "");
+
+            Call<Res> call = api.deleteLike(accessToken, selectedPosting.getPostingId());
+
+            call.enqueue(new Callback<Res>() {
+                @Override
+                public void onResponse(Call<Res> call, Response<Res> response) {
+                    if(response.isSuccessful()){
+
+                        // 4. 화면에 결과를 표시
+                        selectedPosting.setIsLike(0);
+
+                        adapter.notifyDataSetChanged();
+
+                    }else{
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Res> call, Throwable t) {
+
+                }
+            });
+
+
+
+        }
+
+
+    }
+
 }
+
+
+
+
+
+
+
+

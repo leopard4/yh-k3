@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blockent.postingapp.MainActivity;
 import com.blockent.postingapp.R;
 import com.blockent.postingapp.api.NetworkClient;
 import com.blockent.postingapp.api.PostingApi;
@@ -120,79 +121,7 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
                     // 1. 어느번째의 데이터의 좋아요를 누른것인지 확인
                     int index = getAdapterPosition();
 
-                    selectedPosting = postingList.get(index);
-
-                    // 2. 해당행의 좋아요가 이미 좋아요인지 아닌지 파악
-                    if (selectedPosting.getIsLike()  == 0){
-                        // 3. 좋아요 API를 호출
-                        Retrofit retrofit = NetworkClient.getRetrofitClient(context);
-
-                        PostingApi api = retrofit.create(PostingApi.class);
-
-                        SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
-                        String accessToken = "Bearer " +sp.getString(Config.ACCESS_TOKEN, "");
-
-                        Call<Res> call = api.setLike(accessToken, selectedPosting.getPostingId());
-
-                        call.enqueue(new Callback<Res>() {
-                            @Override
-                            public void onResponse(Call<Res> call, Response<Res> response) {
-                                if(response.isSuccessful()){
-
-                                    // 4. 화면에 결과를 표시
-                                    selectedPosting.setIsLike(1);
-
-                                    notifyDataSetChanged();
-
-                                }else{
-
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Res> call, Throwable t) {
-
-                            }
-                        });
-
-
-                    }else{
-                        // 3. 좋아요 해제 API를 호출
-
-                        Retrofit retrofit = NetworkClient.getRetrofitClient(context);
-
-                        PostingApi api = retrofit.create(PostingApi.class);
-
-                        SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
-                        String accessToken = "Bearer " +sp.getString(Config.ACCESS_TOKEN, "");
-
-                        Call<Res> call = api.deleteLike(accessToken, selectedPosting.getPostingId());
-
-                        call.enqueue(new Callback<Res>() {
-                            @Override
-                            public void onResponse(Call<Res> call, Response<Res> response) {
-                                if(response.isSuccessful()){
-
-                                    // 4. 화면에 결과를 표시
-                                    selectedPosting.setIsLike(0);
-
-                                    notifyDataSetChanged();
-
-                                }else{
-
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Res> call, Throwable t) {
-
-                            }
-                        });
-
-
-
-                    }
-
+                    ((MainActivity)context).likeProcess(index);
 
                 }
             });
