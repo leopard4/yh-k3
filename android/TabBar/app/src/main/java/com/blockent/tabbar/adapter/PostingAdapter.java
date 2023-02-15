@@ -36,8 +36,10 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
         // 프레그먼트에서 사용가능토록,
         // 어댑터의 특정 행이나 버튼 누르면 처리할 함수를 만든다.
         void likeProcess(int index);
+        void onImageClick(int index);
     }
     public OnItemClickListener listener;
+
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
@@ -123,6 +125,14 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
 //                    ((FirstFragment) ((MainActivity)context).firstFragment).likeProcess(index);
                     listener.likeProcess(index);
 
+                }
+            });
+
+            imgPhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int index = getAdapterPosition();
+                    listener.onImageClick(index);
                 }
             });
 
