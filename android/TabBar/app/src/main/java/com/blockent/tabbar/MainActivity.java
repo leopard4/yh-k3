@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
 
     // 각 프레그먼트를 멤버변수로 만든다.
-    Fragment firstFragment;
+    public Fragment firstFragment;
     Fragment secondFragment;
     Fragment thirdFragment;
 

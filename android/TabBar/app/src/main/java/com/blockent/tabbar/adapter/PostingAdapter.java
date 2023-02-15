@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.blockent.tabbar.FirstFragment;
 import com.blockent.tabbar.MainActivity;
 import com.blockent.tabbar.R;
 import com.blockent.tabbar.model.Posting;
@@ -31,7 +32,15 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
     SimpleDateFormat sf;
     SimpleDateFormat df;
 
-    Posting selectedPosting;
+    public interface OnItemClickListener {
+        // 프레그먼트에서 사용가능토록,
+        // 어댑터의 특정 행이나 버튼 누르면 처리할 함수를 만든다.
+        void likeProcess(int index);
+    }
+    public OnItemClickListener listener;
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 
     public PostingAdapter(Context context, ArrayList<Posting> postingList) {
         this.context = context;
@@ -111,6 +120,8 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.ViewHold
                     int index = getAdapterPosition();
 
 //                    ((MainActivity)context).likeProcess(index);
+//                    ((FirstFragment) ((MainActivity)context).firstFragment).likeProcess(index);
+                    listener.likeProcess(index);
 
                 }
             });
