@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,10 +22,17 @@ import android.widget.Toast;
 
 import com.blockent.places.adapter.PlaceAdapter;
 import com.blockent.places.api.NetworkClient;
+import com.blockent.places.api.PlaceApi;
+import com.blockent.places.config.Config;
 import com.blockent.places.model.Place;
+import com.blockent.places.model.PlaceList;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     double currentLat;
     double currentLng;
 
+    String keyword;
+    String pagetoken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +67,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int lastPosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                if(lastPosition + 1 == totalCount){
+                    if(pagetoken != null){
+                        addNetworkData();
+                    }
+                }
+
+            }
+        });
 
         // API 호출에 필요한 내 위치 정보 가져오기
 
@@ -101,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String keyword = editKeyword.getText().toString().trim();
+                keyword = editKeyword.getText().toString().trim();
 
                 if(keyword.isEmpty()){
                     Toast.makeText(MainActivity.this, "필수항목입니다.", Toast.LENGTH_SHORT).show();
@@ -122,11 +149,103 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void getNetworkData(){
+    private void addNetworkData() {
         progressBar.setVisibility(View.VISIBLE);
 
         Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+        PlaceApi api = retrofit.create(PlaceApi.class);
 
+        Call<PlaceList> call = api.getPlaceList(
+                keyword,
+                currentLat+","+currentLng,
+                2000,
+                "ko",
+                Config.GOOGLE_API_KEY,
+                pagetoken
+        );
+
+        call.enqueue(new Callback<PlaceList>() {
+            @Override
+            public void onResponse(Call<PlaceList> call, Response<PlaceList> response) {
+                progressBar.setVisibility(View.GONE);
+
+                if(response.isSuccessful()){
+
+                    pagetoken = response.body().getNext_page_token();
+                    placeArrayList.addAll( response.body().getResults() );
+
+                    adapter.notifyDataSetChanged();
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PlaceList> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
+
+    void getNetworkData(){
+        progressBar.setVisibility(View.VISIBLE);
+
+        pagetoken = "";
+
+        Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+        PlaceApi api = retrofit.create(PlaceApi.class);
+
+        Call<PlaceList> call = api.getPlaceList(
+                keyword,
+                currentLat+","+currentLng,
+                2000,
+                "ko",
+                Config.GOOGLE_API_KEY,
+                pagetoken
+                );
+        call.enqueue(new Callback<PlaceList>() {
+            @Override
+            public void onResponse(Call<PlaceList> call, Response<PlaceList> response) {
+                progressBar.setVisibility(View.GONE);
+
+                if(response.isSuccessful()){
+
+                    pagetoken = response.body().getNext_page_token();
+
+                    placeArrayList.clear();
+
+                    placeArrayList.addAll( response.body().getResults() );
+
+                    adapter = new PlaceAdapter(MainActivity.this, placeArrayList);
+                    adapter.setOnItemClickListener(new PlaceAdapter.OnItemClickListener() {
+                        @Override
+                        public void onCardViewClick(int index) {
+                            Place place = placeArrayList.get(index);
+
+                            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                            intent.putExtra("place", place);
+
+                            startActivity(intent);
+
+                        }
+                    });
+
+                    recyclerView.setAdapter(adapter);
+
+                } else{
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PlaceList> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
 
     }
 

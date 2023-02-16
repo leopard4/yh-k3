@@ -1,6 +1,8 @@
 package com.blockent.places.model;
 
-public class Place {
+import java.io.Serializable;
+
+public class Place implements Serializable {
 
     private Geometry geometry;
     private String name;

@@ -1,7 +1,16 @@
 package com.blockent.places.model;
 
-public class Geometry {
+import java.io.Serializable;
 
-    Location location;
+public class Geometry implements Serializable {
 
+    private Location location;
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 }

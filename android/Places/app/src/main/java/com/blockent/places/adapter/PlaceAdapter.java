@@ -17,6 +17,15 @@ import java.util.ArrayList;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> {
 
+    public interface OnItemClickListener{
+        void onCardViewClick(int index);
+    }
+    public OnItemClickListener listener;
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
+
     Context context;
     ArrayList<Place> placeArrayList;
 
@@ -68,6 +77,16 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
             txtName = itemView.findViewById(R.id.txtName);
             txtAddress = itemView.findViewById(R.id.txtAddress);
             cardView = itemView.findViewById(R.id.cardView);
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int index = getAdapterPosition();
+
+                    listener.onCardViewClick(index);
+                }
+            });
+
         }
     }
 }
