@@ -1,3 +1,6 @@
+문의사항 : 제 연락처 blockenters@gmail.com 
+
+
 # YH kdigital
 
 조편성 : https://docs.google.com/spreadsheets/d/1jCzM0z_7d3rrSZiBlJgtZcZN61jHV77IMC_WwQkzxe0/edit?usp=sharing
