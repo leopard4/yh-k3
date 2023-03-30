@@ -43,6 +43,7 @@ RDBMS vs NoSQL : https://vision-ai.tistory.com/entry/RDBMS-vs-NoSQL
 
 온프레미스와 클라우드 : https://vision-ai.tistory.com/entry/On-Premise-%EC%99%80-Cloud-Services
 
+인덱스 : https://wildeveloperetrain.tistory.com/131 
 
 
 
