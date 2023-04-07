@@ -3,6 +3,9 @@
 
 # YH kdigital
 
+취업준비 : https://docs.google.com/presentation/d/1d_LVd9Yh331jtR0BGm-7jJHGPcYNmWKCtTk4SOkF9-E/edit?usp=sharing
+
+
 조편성 : https://docs.google.com/spreadsheets/d/1jCzM0z_7d3rrSZiBlJgtZcZN61jHV77IMC_WwQkzxe0/edit?usp=sharing
 
 
